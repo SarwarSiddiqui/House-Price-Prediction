@@ -1,0 +1,274 @@
+
+<!-- Bangalore House Price Predictor -->
+
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Bangalore House Price Predictor ML App</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <style>
+  
+      body {
+	  
+     /* <!-- background-image: url('static/images/house3.jpg'); --> */
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+
+    h1   {color: red;}  /* CSS code for heading h1 */
+    p   {color: yellow;}  /* CSS code for heading h1 */
+
+    /* CSS code for button */
+    .button_css {
+    color: #494949 !important;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: #ffffff;
+    padding: 20px;
+    border: 4px solid #494949 !important;
+    display: inline-block;
+    transition: all 0.4s ease 0s;
+    }
+    
+    .button_css:hover {
+    color: #ffffff !important;
+    background: #f6b93b;
+    border-color: #f6b93b !important;
+    transition: all 0.4s ease 0s;
+    }
+    
+	.cen{
+		text-align: center;
+	}  
+	
+    .footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #203864;
+  color: white;
+  text-align: center;
+  
+  /* unvisited link */ 
+ /* a:link { color: White; } */
+  /* visited link */ 
+ /* a:visited { color: green; } */
+}   
+  </style>
+
+</head>
+
+<body class="container-fluid">
+
+  <!-- Show Banner-->
+  <div>
+    <img src="../static/images/bangalore house banner.png" class="w3-border w3-padding" alt="House Banner" style="width:100%">
+  </div>
+  <div class="login">
+		<form action="{{ url_for('predict')}}"method="post">
+				
+		  <div class="row">		  
+			<div class="col-sm-2"></div>
+			<div class="col-sm-8">
+				<h1>*Enter the Information of House to Predict the Price*</h1>
+			</div>
+			<div class="col-sm-2"></div>
+		  </div>
+		  <div class="row">
+			<div class="col-sm-2"></div>
+			<div class="col-sm-4">
+				<select class="form-control" id="bathrooms" name="bathrooms" placeholder="Bathrooms" required="required">
+					<option name="bathrooms" value="">Select Bathrooms</option>
+					<option name="bathrooms" value="1">1</option>
+					<option name="bathrooms" value="2">2</option>
+					<option name="bathrooms" value="3">3</option>
+					<option name="bathrooms" value="4">4</option>
+					<option name="bathrooms" value="5">5</option>
+				</select><br>
+				<select class="form-control" id="balcony" name="balcony" placeholder="Balcony" required="required">
+					<option name="balcony" value="">Select Balcony</option>
+					<option name="balcony" value="1">1</option>
+					<option name="balcony" value="2">2</option>
+					<option name="balcony" value="3">3</option>
+					<option name="balcony" value="4">4</option>
+					<option name="balcony" value="5">5</option>
+				</select><br>
+				<select class="form-control" id="bhk" name="bhk" placeholder="BHK" required="required">
+					<option name="bhk" value="">Select BHK</option>
+					<option name="bhk" value="1">1</option>
+					<option name="bhk" value="2">2</option>
+					<option name="bhk" value="3">3</option>
+					<option name="bhk" value="4">4</option>
+					<option name="bhk" value="5">5</option>
+				</select><br>
+				<select class="form-control" id="location" name="location" placeholder="House Location" required="required">
+					<option name="location" value="5th Phase JP Nagar">5th Phase JP Nagar</option>
+					<option name="location" value="7th Phase JP Nagar">7th Phase JP Nagar</option>
+					<option name="location" value="8th Phase JP Nagar">8th Phase JP Nagar</option>
+					<option name="location" value="Akshaya Nagar">Akshaya Nagar</option>
+					<option name="location" value="Ambedkar Nagar">Ambedkar Nagar</option>
+					<option name="location" value="Ananth Nagar">Ananth Nagar</option>
+					<option name="location" value="Anekal">Anekal</option>
+					<option name="location" value="Attibele">Attibele</option>
+					<option name="location" value="Balagere">Balagere</option>
+					<option name="location" value="Banashankari">Banashankari</option>
+					<option name="location" value="Bannerghatta Road">Bannerghatta Road</option>
+					<option name="location" value="Begur Road">Begur Road</option>
+					<option name="location" value="Bellandur">Bellandur</option>
+					<option name="location" value="Bhoganhalli">Bhoganhalli</option>
+					<option name="location" value="Bisuvanahalli">Bisuvanahalli</option>
+					<option name="location" value="Bommasandra">Bommasandra</option>
+					<option name="location" value="Brookefield">Brookefield</option>
+					<option name="location" value="BTM 2nd Stage">BTM 2nd Stage</option>
+					<option name="location" value="Budigere">Budigere</option>
+					<option name="location" value="Chandapura">Chandapura</option>
+					<option name="location" value="Channasandra">Channasandra</option>
+					<option name="location" value="Devanahalli">Devanahalli</option>
+					<option name="location" value="Dodda Nekkundi">Dodda Nekkundi</option>
+					<option name="location" value="Doddathoguru">Doddathoguru</option>
+					<option name="location" value="Electronic City Phase II">Electronic City Phase II</option>
+					<option name="location" value="Electronic City">Electronic City</option>
+					<option name="location" value="Electronics City Phase 1">Electronics City Phase 1</option>
+					<option name="location" value="Frazer Town">Frazer Town</option>
+					<option name="location" value="Gottigere">Gottigere</option>
+					<option name="location" value="Green Glen Layout">Green Glen Layout</option>
+					<option name="location" value="Haralur Road">Haralur Road</option>
+					<option name="location" value="Harlur">Harlur</option>
+					<option name="location" value="Hebbal">Hebbal</option>
+					<option name="location" value="Hegde Nagar">Hegde Nagar</option>
+					<option name="location" value="Hennur Road">Hennur Road</option>
+					<option name="location" value="Hennur">Hennur</option>
+					<option name="location" value="Hoodi">Hoodi</option>
+					<option name="location" value="Horamavu Agara">Horamavu Agara</option>
+					<option name="location" value="Horamavu Banaswadi">Horamavu Banaswadi</option>
+					<option name="location" value="Hormavu">Hormavu</option>
+					<option name="location" value="Hosa Road">Hosa Road</option>
+					<option name="location" value="HSR Layout">HSR Layout</option>
+					<option name="location" value="Hulimavu">Hulimavu</option>
+					<option name="location" value="Indira Nagar">Indira Nagar</option>
+					<option name="location" value="Jakkur">Jakkur</option>
+					<option name="location" value="Jalahalli">Jalahalli</option>
+					<option name="location" value="Jigani">Jigani</option>
+					<option name="location" value="JP Nagar">JP Nagar</option>
+					<option name="location" value="Kadugodi">Kadugodi</option>
+					<option name="location" value="Kaggadasapura">Kaggadasapura</option>
+					<option name="location" value="Kalena Agrahara">Kalena Agrahara</option>
+					<option name="location" value="Kanakapura">Kanakapura</option>
+					<option name="location" value="Kanakpura Road">Kanakpura Road</option>
+					<option name="location" value="Kasavanhalli">Kasavanhalli</option>
+					<option name="location" value="Kengeri Satellite Town">Kengeri Satellite Town</option>
+					<option name="location" value="Kengeri">Kengeri</option>
+					<option name="location" value="Koramangala">Koramangala</option>
+					<option name="location" value="Kothanur">Kothanur</option>
+					<option name="location" value="KR Puram">KR Puram</option>
+					<option name="location" value="Kudlu Gate">Kudlu Gate</option>
+					<option name="location" value="Kudlu">Kudlu</option>
+					<option name="location" value="Kundalahalli">Kundalahalli</option>
+					<option name="location" value="Lakshminarayana Pura">Lakshminarayana Pura</option>
+					<option name="location" value="Malleshwaram">Malleshwaram</option>
+					<option name="location" value="Marathahalli">Marathahalli</option>
+					<option name="location" value="Mysore Road">Mysore Road</option>
+					<option name="location" value="Nagarbhavi">Nagarbhavi</option>
+					<option name="location" value="Old Airport Road">Old Airport Road</option>
+					<option name="location" value="Old Madras Road">Old Madras Road</option>
+					<option name="location" value="Panathur">Panathur</option>
+					<option name="location" value="Rachenahalli">Rachenahalli</option>
+					<option name="location" value="Raja Rajeshwari Nagar">Raja Rajeshwari Nagar</option>
+					<option name="location" value="Rajaji Nagar">Rajaji Nagar</option>
+					<option name="location" value="Ramagondanahalli">Ramagondanahalli</option>
+					<option name="location" value="Ramamurthy Nagar">Ramamurthy Nagar</option>
+					<option name="location" value="Raman Nagar">Raman Nagar</option>
+					<option name="location" value="Sahakara Nagar">Sahakara Nagar</option>
+					<option name="location" value="Sarjapur Road">Sarjapur Road</option>
+					<option name="location" value="Sarjapur">Sarjapur</option>
+					<option name="location" value="Subramanyapura">Subramanyapura</option>
+					<option name="location" value="Talaghattapura">Talaghattapura</option>
+					<option name="location" value="TC Palaya">TC Palaya</option>
+					<option name="location" value="Thanisandra">Thanisandra</option>
+					<option name="location" value="Thigalarapalya">Thigalarapalya</option>
+					<option name="location" value="Uttarahalli">Uttarahalli</option>
+					<option name="location" value="Varthur">Varthur</option>
+					<option name="location" value="Vidyaranyapura Domlur">Vidyaranyapura Domlur</option>
+					<option name="location" value="Vidyaranyapura Hebbal Kempapura">Vidyaranyapura Hebbal Kempapura</option>
+					<option name="location" value="Vidyaranyapura Hosur Road">Vidyaranyapura Hosur Road</option>
+					<option name="location" value="Vidyaranyapura Mahadevpura">Vidyaranyapura Mahadevpura</option>
+					<option name="location" value="Vidyaranyapura Tumkur Road">Vidyaranyapura Tumkur Road</option>
+					<option name="location" value="Vidyaranyapura">Vidyaranyapura</option>
+					<option name="location" value="Vijayanagar">Vijayanagar</option>
+					<option name="location" value="Vittasandra">Vittasandra</option>
+					<option name="location" value="Whitefield">Whitefield</option>
+					<option name="location" value="Yelahanka New Town">Yelahanka New Town</option>
+					<option name="location" value="Yelahanka">Yelahanka</option>
+					<option name="location" value="Yeshwanthpur">Yeshwanthpur</option>
+				</select><br>
+				
+				<!-- <input class="form-control" align="center" type="number" name="bathrooms" placeholder="Bathrooms" required="required" width="60px" height="10" step=".01"/><br> -->
+				<!-- <input class="form-control" align="center" type="number" name="balcony" placeholder="Balcony" required="required" width="48" height="10" step=".01"/><br> -->
+				<!-- <input class="form-control" align="center" type="number" name="bhk" placeholder="BHK" required="required" width="48" height="10" step=".01"/><br>			 -->
+				<!-- <input class="form-control" type="text" name="location" placeholder="House Location" required="required" /><br>  -->
+				
+			</div>
+			<div class="col-sm-4">	
+				<input class="form-control" text-align="center" type="number" name="total_sqft_int" placeholder="Total Squre Foot" required="required" width="48" height="10" step=".01"/><br>
+				<input class="form-control" text-align="center" type="number" name="price_per_sqft" placeholder="Price Per Squre Foot" required="required" width="48" height="10" step=".01"/><br>
+				<!-- <input class="form-control" type="text" name="area_type" placeholder="Area Type" required="required" /><br> -->
+				<!-- <input class="form-control" type="text" name="availability" placeholder="House Availability" required="required" /><br> -->
+				<select class="form-control" id="area_type" name="area_type" placeholder="Area Type" required="required">
+					<option name="area_type" value="">Select Area</option>					
+					<option name="area_type" value="Plot  Area">Plot  Area</option>
+					<option name="area_type" value="Super built-up  Area">Super Built-Up Area</option>
+					<option name="area_type" value="Built-up  Area">Built-Up Area</option>
+				</select><br>
+				<select class="form-control" id="availability" name="availability" placeholder="House Availability" required="required">
+					<option name="availability" value="">Select Availability</option>
+					<option name="availability" value="Ready To Move">Ready To Move</option>
+					<option name="availability" value="Under Construction">Under Construction</option>
+				</select><br>
+			</div>
+			<div class="col-sm-2"></div>
+		 </div>
+		 <div class="row">
+			<div class="col-sm-2"></div>
+			<div class="col-sm-8">	
+				<!-- Show button -->
+				<div class="button_cont" text-align="center">
+					<button type="submit" class="btn btn-primary btn-block btn-large">
+						<strong>Predict House Price</strong>
+					</button>
+				</div>
+				   <!-- Show predicted output using ML model --> 
+				   <div class="cen">
+					   
+						<h2> {{ prediction_text }}</h2>
+					
+				   </div>
+			</div>
+			<div class="col-sm-2"></div>
+		  </div>
+		<div>			
+	</form>
+</div>
+ <div class="row">
+	<div class="col-sm-12">
+		<div class="footer">
+			<p>Developed By |
+			  <a href="https://www.linkedin.com/in/kumari-sandhya-b79a801b7" target="_blank" style="color:#fff"> KUMARI SANDHYA </a> & <a href="https://www.linkedin.com/in/sarwar-siddiqui/" target="_blank" style="color:#fff"> SARWAR SIDDIQUI </a>
+			</p>
+		</div>
+	</div>
+</div>
+ 
+
+
+
+</body>
+</html>
